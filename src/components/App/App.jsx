@@ -13,7 +13,7 @@ const GAME_STATES = {
 
 const App = () => {
   // Initialize gameState to start, a simple start menu for the player
-  const [gameState, setGameState] = useState(GAME_STATES.START);
+  const [gameState, setGameState] = useState(GAME_STATES.BATTLE);
 
   return (
     <div className={styles.app}>

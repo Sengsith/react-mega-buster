@@ -9,15 +9,13 @@ const StartMenu = ({ GAME_STATES, setGameState }) => {
 
   return (
     <div className={styles.start_menu_wrapper}>
-      <div className={styles.start_title}>Mega Buster React Demo</div>
+      <h1 className="title">Mega Buster React Demo</h1>
       <p className={styles.instructions}>
         WASD to move around on the grid!
         <br />
         Space Bar to fire a projectile at the enemy!
       </p>
-      <button className={styles.start_button} onClick={onStartClick}>
-        Start Game
-      </button>
+      <button onClick={onStartClick}>Start Game</button>
     </div>
   );
 };
