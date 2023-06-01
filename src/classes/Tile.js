@@ -1,7 +1,7 @@
 class Tile {
-  constructor(width = 100, height = 100) {
-    this.width = width;
-    this.height = height;
+  constructor(borderColor) {
+    this.tileSize = 150;
+    this.borderColor = borderColor;
     this.gameObjs = {
       playerObj: {},
       enemyObj: {},

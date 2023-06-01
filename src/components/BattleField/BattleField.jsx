@@ -1,6 +1,8 @@
 import React from "react";
 
-import TileComponent from "../Tile/TileComponent.jsx";
+import GridComponent from "../Grid/GridComponent";
+
+import styles from "./battlefield.module.scss";
 
 const BattleField = () => {
   // Questions:
@@ -16,8 +18,8 @@ const BattleField = () => {
   // Shoot a projectile (function)
 
   return (
-    <div>
-      <TileComponent />
+    <div className={styles.battlefield}>
+      <GridComponent />
     </div>
   );
 };

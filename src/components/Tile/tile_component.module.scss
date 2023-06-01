@@ -1,4 +1,7 @@
 .tile {
   background-color: black;
   border: 3px solid blue;
+  & + & {
+    margin-left: .75em;
+  }
 }
