@@ -1,12 +1,14 @@
 class Tile {
-  constructor(borderColor) {
-    this.tileSize = 150;
+  constructor({ borderColor, currentTileIndex }) {
     this.borderColor = borderColor;
-    this.gameObjs = {
-      playerObj: {},
-      enemyObj: {},
-      attackObjs: [],
-    };
+    this.currentTileIndex = currentTileIndex;
+
+    this.tileSize = 150;
+    // this.gameObjs = {
+    //   playerObj: {},
+    //   enemyObj: {},
+    //   attackObjs: [],
+    // };
   }
 }
 
