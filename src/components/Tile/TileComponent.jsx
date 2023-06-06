@@ -12,12 +12,14 @@ const TileComponent = ({ tile, player }) => {
     border: `3px solid ${tile.borderColor}`,
   };
 
+  // Check each tile if it has a player on it, if it does, then render it
+  const isPlayerOnTile =
+    tile.currentTileIndex.i === player.currentTileIndex.i &&
+    tile.currentTileIndex.j === player.currentTileIndex.j;
+
   return (
     <div className={styles.tile} style={tileStyle}>
-      {tile.currentTileIndex.i === player.currentTileIndex.i &&
-        tile.currentTileIndex.j === player.currentTileIndex.j && (
-          <FighterComponent player={player} />
-        )}
+      {isPlayerOnTile && <FighterComponent player={player} />}
     </div>
   );
 };

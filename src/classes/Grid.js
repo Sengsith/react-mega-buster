@@ -12,16 +12,6 @@ class Grid {
     this.player = {};
   }
 
-  // Initialize player in here
-  initializePlayer() {
-    this.player = new Fighter({
-      health: 100,
-      tag: "player",
-      size: { width: 50, height: 50 },
-      currentTileIndex: { i: 1, j: 1 },
-    });
-  }
-
   // Initialize a grid based on how many rows and cols
   initializeField() {
     for (let i = 0; i < this.rows; i++) {
@@ -37,6 +27,16 @@ class Grid {
       }
       this.field.push(row);
     }
+  }
+
+  // Initialize player in here
+  initializePlayer() {
+    this.player = new Fighter({
+      health: 100,
+      tag: "player",
+      size: { width: 50, height: 50 },
+      currentTileIndex: { i: 1, j: 1 },
+    });
   }
 }
 

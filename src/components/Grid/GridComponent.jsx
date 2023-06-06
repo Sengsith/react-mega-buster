@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Grid from "../../classes/Grid";
 import TileComponent from "../Tile/TileComponent";
@@ -10,6 +10,25 @@ const GridComponent = () => {
   grid.initializeField();
   grid.initializePlayer();
   console.log(grid);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "w") {
+        grid.player.moveUp();
+      } else if (e.key === "a") {
+        grid.player.moveLeft();
+      } else if (e.key === "s") {
+        grid.player.moveDown();
+      } else if (e.key === "d") {
+        grid.player.moveRight();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className={styles.grid_wrapper}>
