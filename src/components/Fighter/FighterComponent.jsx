@@ -6,8 +6,8 @@ import styles from "./fighter.module.scss";
 
 const FighterComponent = ({ player }) => {
   const playerStyle = {
-    height: `${player.size.height}px`,
-    width: `${player.size.width}px`,
+    height: `${player.size}px`,
+    width: `${player.size}px`,
     backgroundColor: "orange",
   };
 

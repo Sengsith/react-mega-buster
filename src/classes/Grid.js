@@ -2,14 +2,12 @@
 // import tile class, create a tile for each grid slot
 
 import Tile from "./Tile";
-import Fighter from "./Fighter";
 
 class Grid {
   constructor(rows = 3, cols = 6) {
     this.rows = rows;
     this.cols = cols;
     this.field = [];
-    this.player = {};
   }
 
   // Initialize a grid based on how many rows and cols
@@ -27,16 +25,6 @@ class Grid {
       }
       this.field.push(row);
     }
-  }
-
-  // Initialize player in here
-  initializePlayer() {
-    this.player = new Fighter({
-      health: 100,
-      tag: "player",
-      size: { width: 50, height: 50 },
-      currentTileIndex: { i: 1, j: 1 },
-    });
   }
 }
 

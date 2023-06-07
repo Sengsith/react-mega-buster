@@ -8,36 +8,44 @@ class Fighter {
   }
 
   moveUp() {
-    console.log("up");
-    this.currentTileIndex = {
-      ...this.currentTileIndex,
-      i: this.currentTileIndex.i - 1,
-    };
-    console.log(this.currentTileIndex);
+    const newFighter = new Fighter({
+      ...this,
+      currentTileIndex: {
+        ...this.currentTileIndex,
+        i: this.currentTileIndex.i <= 0 ? 0 : this.currentTileIndex.i - 1,
+      },
+    });
+    return newFighter;
   }
   moveLeft() {
-    console.log("left");
-    this.currentTileIndex = {
-      ...this.currentTileIndex,
-      j: this.currentTileIndex.j - 1,
-    };
-    console.log(this.currentTileIndex);
+    const newFighter = new Fighter({
+      ...this,
+      currentTileIndex: {
+        ...this.currentTileIndex,
+        j: this.currentTileIndex.j <= 0 ? 0 : this.currentTileIndex.j - 1,
+      },
+    });
+    return newFighter;
   }
   moveDown() {
-    console.log("down");
-    this.currentTileIndex = {
-      ...this.currentTileIndex,
-      i: this.currentTileIndex.i + 1,
-    };
-    console.log(this.currentTileIndex);
+    const newFighter = new Fighter({
+      ...this,
+      currentTileIndex: {
+        ...this.currentTileIndex,
+        i: this.currentTileIndex.i >= 2 ? 2 : this.currentTileIndex.i + 1,
+      },
+    });
+    return newFighter;
   }
   moveRight() {
-    console.log("right");
-    this.currentTileIndex = {
-      ...this.currentTileIndex,
-      j: this.currentTileIndex.j + 1,
-    };
-    console.log(this.currentTileIndex);
+    const newFighter = new Fighter({
+      ...this,
+      currentTileIndex: {
+        ...this.currentTileIndex,
+        j: this.currentTileIndex.j >= 2 ? 2 : this.currentTileIndex.j + 1,
+      },
+    });
+    return newFighter;
   }
 }
 

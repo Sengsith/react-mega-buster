@@ -4,11 +4,6 @@ class Tile {
     this.currentTileIndex = currentTileIndex;
 
     this.tileSize = 150;
-    // this.gameObjs = {
-    //   playerObj: {},
-    //   enemyObj: {},
-    //   attackObjs: [],
-    // };
   }
 }
 
