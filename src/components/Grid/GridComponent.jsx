@@ -8,6 +8,7 @@ import styles from "./grid_component.module.scss";
 
 const GridComponent = () => {
   const [player, setPlayer] = useState(null);
+  const [attacks, setAttacks] = useState([]);
 
   const grid = new Grid();
   grid.initializeField();
@@ -34,6 +35,20 @@ const GridComponent = () => {
       } else if ((e.key === "d" || e.key === "D") && !e.repeat) {
         // Increment player.currentTileIndex.j
         setPlayer((prevPlayer) => prevPlayer.moveRight());
+      } else if (e.key === " " && !e.repeat) {
+        // user hits space bar
+        // call the fire function
+        // spawn a projectile in tile in front of the player
+        // create an object using the attack class
+        // after a certain amount of time, iterate through row, delete at the end of tile
+        // projectile may have to be a class and component, and render on tile if it exists
+        const projectile = new Attack({
+          damage: player.buster.damage,
+          size: player.buster.size,
+          timePerTile: player.buster.timePerTile,
+          currentTileIndex: { ...player.buster.currentTileIndex },
+        });
+        setAttacks((prevAttacks) => [...[prevAttacks, projectile]]);
       }
     };
 
@@ -48,12 +63,18 @@ const GridComponent = () => {
     <div className={styles.grid_wrapper}>
       {grid &&
         player &&
+        attacks &&
         grid.field.map((row, index) => {
           return (
             <div key={index} className={styles.grid_row}>
               {row.map((tile, index) => {
                 return (
-                  <TileComponent key={index} tile={tile} player={player} />
+                  <TileComponent
+                    key={index}
+                    tile={tile}
+                    player={player}
+                    attacks={attacks}
+                  />
                 );
               })}
             </div>

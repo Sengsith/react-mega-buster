@@ -5,6 +5,16 @@ class Fighter {
     this.size = size;
     // Default spawn index position of player
     this.currentTileIndex = currentTileIndex;
+    // information about player's buster
+    const buster = {
+      damage: 1,
+      size: 25,
+      timePerTile: 200,
+      currentTileIndex: {
+        i: this.currentTileIndex.i + 1,
+        j: currentTileIndex.j,
+      },
+    };
   }
 
   moveUp() {
