@@ -2,53 +2,56 @@ import React, { useState, useEffect } from "react";
 
 import Grid from "../../classes/Grid";
 import Fighter from "../../classes/Fighter";
+import Attack from "../../classes/Attack";
 import TileComponent from "../Tile/TileComponent";
 
 import styles from "./grid_component.module.scss";
 
 const GridComponent = () => {
-  const [player, setPlayer] = useState(null);
   const [attacks, setAttacks] = useState([]);
+  const [playerCurrentTileIndex, setPlayerCurrentTileIndex] = useState(null);
 
   const grid = new Grid();
   grid.initializeField();
 
+  const player = new Fighter({
+    health: 100,
+    tag: "player",
+    size: 75,
+    currentTileIndex: { i: 1, j: 1 },
+  });
+
   useEffect(() => {
-    const player = new Fighter({
-      health: 100,
-      tag: "player",
-      size: 75,
-      currentTileIndex: { i: 1, j: 1 },
-    });
-    setPlayer(player);
+    setPlayerCurrentTileIndex(player.currentTileIndex);
 
     const handleKeyDown = (e) => {
       if ((e.key === "w" || e.key === "W") && !e.repeat) {
         // Decrement player.currentTileIndex.i
-        setPlayer((prevPlayer) => prevPlayer.moveUp());
+        player.currentTileIndex = player.moveUp();
+        setPlayerCurrentTileIndex(player.currentTileIndex);
       } else if ((e.key === "a" || e.key === "A") && !e.repeat) {
         // Decrement player.currentTileIndex.j
-        setPlayer((prevPlayer) => prevPlayer.moveLeft());
+        player.currentTileIndex = player.moveLeft();
+        setPlayerCurrentTileIndex(player.currentTileIndex);
       } else if ((e.key === "s" || e.key === "S") && !e.repeat) {
         // Increment player.currentTileIndex.i
-        setPlayer((prevPlayer) => prevPlayer.moveDown());
+        player.currentTileIndex = player.moveDown();
+        setPlayerCurrentTileIndex(player.currentTileIndex);
       } else if ((e.key === "d" || e.key === "D") && !e.repeat) {
         // Increment player.currentTileIndex.j
-        setPlayer((prevPlayer) => prevPlayer.moveRight());
+        player.currentTileIndex = player.moveRight();
+        setPlayerCurrentTileIndex(player.currentTileIndex);
       } else if (e.key === " " && !e.repeat) {
-        // user hits space bar
-        // call the fire function
-        // spawn a projectile in tile in front of the player
-        // create an object using the attack class
-        // after a certain amount of time, iterate through row, delete at the end of tile
-        // projectile may have to be a class and component, and render on tile if it exists
         const projectile = new Attack({
           damage: player.buster.damage,
           size: player.buster.size,
           timePerTile: player.buster.timePerTile,
-          currentTileIndex: { ...player.buster.currentTileIndex },
+          currentTileIndex: {
+            i: player.currentTileIndex.i,
+            j: player.currentTileIndex.j + 1,
+          },
         });
-        setAttacks((prevAttacks) => [...[prevAttacks, projectile]]);
+        // setAttacks((prevAttacks) => [...prevAttacks, projectile]);
       }
     };
 
@@ -63,7 +66,6 @@ const GridComponent = () => {
     <div className={styles.grid_wrapper}>
       {grid &&
         player &&
-        attacks &&
         grid.field.map((row, index) => {
           return (
             <div key={index} className={styles.grid_row}>
@@ -73,6 +75,7 @@ const GridComponent = () => {
                     key={index}
                     tile={tile}
                     player={player}
+                    playerCurrentTileIndex={playerCurrentTileIndex}
                     attacks={attacks}
                   />
                 );
@@ -80,6 +83,10 @@ const GridComponent = () => {
             </div>
           );
         })}
+      <div>
+        {playerCurrentTileIndex &&
+          `${playerCurrentTileIndex.i}, ${playerCurrentTileIndex.j}`}
+      </div>
     </div>
   );
 };

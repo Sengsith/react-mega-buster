@@ -1,9 +1,9 @@
 class Attack {
-  constructor({ damage = 1, size = 25, timePerTile = 200 }) {
+  constructor({ damage = 1, size = 25, timePerTile = 200, currentTileIndex }) {
     this.damage = damage;
     this.size = size;
     this.timePerTile = timePerTile;
-    this.currentTileIndex = {};
+    this.currentTileIndex = currentTileIndex;
   }
 
   move() {
@@ -13,9 +13,10 @@ class Attack {
 
   isExpired() {
     // Check if projectile has reached the end of row/lifespan
+    return this.currentTileIndex.j >= 5;
   }
 
-  isOnCurrentTile(currentTileIndex) {
+  isAttackOnCurrentTile(currentTileIndex) {
     return (
       currentTileIndex.i === this.currentTileIndex.i &&
       currentTileIndex.j === this.currentTileIndex.j
