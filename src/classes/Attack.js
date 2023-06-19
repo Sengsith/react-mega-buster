@@ -6,9 +6,29 @@ class Attack {
     this.currentTileIndex = currentTileIndex;
   }
 
-  move() {
+  // startIndex(num), setState(func)
+  move(setState) {
     // Movement logic of the projectile
     // Update currentTileIndex based on the movement direction
+
+    // Delay function for the projectile
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    for (
+      let i = this.currentTileIndex.j, p = new Promise((resolve) => resolve());
+      i <= 5;
+      i++
+    ) {
+      p = p
+        .then(() => delay(this.timePerTile))
+        .then(() => {
+          const newCurrentTileIndex = {
+            i: this.currentTileIndex.i,
+            j: this.currentTileIndex.j + 1,
+          };
+          this.currentTileIndex = newCurrentTileIndex;
+          setState(newCurrentTileIndex);
+        });
+    }
   }
 
   isExpired() {

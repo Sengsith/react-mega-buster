@@ -12,7 +12,7 @@ class Fighter extends React.Component {
     this.buster = {
       damage: 1,
       size: 25,
-      timePerTile: 200,
+      timePerTile: 25,
       currentTileIndex: {},
     };
     // state to keep track of previous

@@ -8,8 +8,8 @@ import TileComponent from "../Tile/TileComponent";
 import styles from "./grid_component.module.scss";
 
 const GridComponent = () => {
-  const [attacks, setAttacks] = useState([]);
   const [playerCurrentTileIndex, setPlayerCurrentTileIndex] = useState(null);
+  const [busterCurrentTileIndex, setBusterCurrentTileIndex] = useState(null);
 
   const grid = new Grid();
   grid.initializeField();
@@ -42,7 +42,7 @@ const GridComponent = () => {
         player.currentTileIndex = player.moveRight();
         setPlayerCurrentTileIndex(player.currentTileIndex);
       } else if (e.key === " " && !e.repeat) {
-        const projectile = new Attack({
+        const busterProjectile = new Attack({
           damage: player.buster.damage,
           size: player.buster.size,
           timePerTile: player.buster.timePerTile,
@@ -51,7 +51,10 @@ const GridComponent = () => {
             j: player.currentTileIndex.j + 1,
           },
         });
-        // setAttacks((prevAttacks) => [...prevAttacks, projectile]);
+        // Update state for buster projectile
+        setBusterCurrentTileIndex(busterProjectile.currentTileIndex);
+        // Move the projectile forward
+        busterProjectile.move(setBusterCurrentTileIndex);
       }
     };
 
@@ -76,7 +79,7 @@ const GridComponent = () => {
                     tile={tile}
                     player={player}
                     playerCurrentTileIndex={playerCurrentTileIndex}
-                    attacks={attacks}
+                    busterCurrentTileIndex={busterCurrentTileIndex}
                   />
                 );
               })}
@@ -84,8 +87,13 @@ const GridComponent = () => {
           );
         })}
       <div>
+        Player:{" "}
         {playerCurrentTileIndex &&
           `${playerCurrentTileIndex.i}, ${playerCurrentTileIndex.j}`}
+        <br />
+        Buster:{" "}
+        {busterCurrentTileIndex &&
+          `${busterCurrentTileIndex.i}, ${busterCurrentTileIndex.j}`}
       </div>
     </div>
   );

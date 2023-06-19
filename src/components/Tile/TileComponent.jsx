@@ -5,9 +5,14 @@ import AttackComponent from "../Attack/AttackComponent";
 
 import styles from "./tile_component.module.scss";
 
-const TileComponent = ({ tile, player, playerCurrentTileIndex, attacks }) => {
+const TileComponent = ({
+  tile,
+  player,
+  playerCurrentTileIndex,
+  busterCurrentTileIndex,
+}) => {
   const [isPlayerOnTile, setIsPlayerOnTile] = useState(false);
-  const [isAttacksOnTile, setIsAttacksOnTile] = useState(null);
+  const [isBusterOnTile, setIsBusterOnTile] = useState(null);
 
   useEffect(() => {
     // Use playerCurrentTileIndex state to work against stale closures(?)
@@ -17,13 +22,20 @@ const TileComponent = ({ tile, player, playerCurrentTileIndex, attacks }) => {
     setIsPlayerOnTile(newIsPlayerOnTile);
   }, [playerCurrentTileIndex]);
 
+  // useEffect(() => {
+  //   // Check each element in attacks array if they are on a tile
+  //   const newIsAttacksOnTile = attacks.some((attack) => {
+  //     return attack.isAttackOnCurrentTile(tile.currentTileIndex);
+  //   });
+  //   setIsAttacksOnTile(newIsAttacksOnTile);
+  // }, [attacks]);
+
   useEffect(() => {
-    // Check each element in attacks array if they are on a tile
-    const newIsAttacksOnTile = attacks.some((attack) => {
-      return attack.isAttackOnCurrentTile(tile.currentTileIndex);
-    });
-    setIsAttacksOnTile(newIsAttacksOnTile);
-  }, [attacks]);
+    const newIsBusterOnTile =
+      tile.currentTileIndex.i === busterCurrentTileIndex?.i &&
+      tile.currentTileIndex.j === busterCurrentTileIndex?.j;
+    setIsBusterOnTile(newIsBusterOnTile);
+  }, [busterCurrentTileIndex]);
 
   // Height and width taken from constructor, default = 100px
   const tileStyle = {
@@ -36,7 +48,7 @@ const TileComponent = ({ tile, player, playerCurrentTileIndex, attacks }) => {
   return (
     <div className={styles.tile} style={tileStyle}>
       {isPlayerOnTile && <FighterComponent player={player} />}
-      {isAttacksOnTile && <AttackComponent />}
+      {isBusterOnTile && <AttackComponent />}
     </div>
   );
 };
