@@ -5,19 +5,13 @@ import "../../classes/Fighter";
 import styles from "./fighter.module.scss";
 
 const FighterComponent = ({ player, enemy }) => {
-  const playerStyle = {
-    height: `${player.size}px`,
-    width: `${player.size}px`,
-    backgroundColor: "orange",
+  const fighterStyle = {
+    height: player ? `${player?.size}px` : `${enemy?.size}px`,
+    width: player ? `${player?.size}px` : `${enemy?.size}px`,
+    backgroundColor: player ? "orange" : "green",
   };
 
-  const enemyStyle = {
-    height: `${enemy.size}px`,
-    width: `${enemy.size}px`,
-    backgroundColor: "green",
-  };
-
-  return <div className={styles.fighter} style={playerStyle}></div>;
+  return <div className={styles.fighter} style={fighterStyle}></div>;
 };
 
 export default FighterComponent;

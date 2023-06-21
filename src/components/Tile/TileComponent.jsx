@@ -11,6 +11,7 @@ const TileComponent = ({
   enemy,
   playerCurrentTileIndex,
   busterCurrentTileIndex,
+  enemyCurrentTileIndex,
 }) => {
   const [isPlayerOnTile, setIsPlayerOnTile] = useState(false);
   const [isEnemyOnTile, setIsEnemyOnTile] = useState(false);
@@ -23,6 +24,13 @@ const TileComponent = ({
       tile.currentTileIndex.j === playerCurrentTileIndex?.j;
     setIsPlayerOnTile(newIsPlayerOnTile);
   }, [playerCurrentTileIndex]);
+
+  useEffect(() => {
+    const newIsEnemyOnTile =
+      tile.currentTileIndex.i === enemyCurrentTileIndex?.i &&
+      tile.currentTileIndex.j === enemyCurrentTileIndex?.j;
+    setIsEnemyOnTile(newIsEnemyOnTile);
+  }, [enemyCurrentTileIndex]);
 
   // useEffect(() => {
   //   // Check each element in attacks array if they are on a tile
@@ -49,8 +57,9 @@ const TileComponent = ({
   // If the currentTileIndex of attack and the currentTileIndex of the tile is the same, then we render out the attack
   return (
     <div className={styles.tile} style={tileStyle}>
-      {isPlayerOnTile && <FighterComponent player={player} enemy={enemy} />}
+      {isPlayerOnTile && <FighterComponent player={player} enemy={null} />}
       {isBusterOnTile && <AttackComponent />}
+      {isEnemyOnTile && <FighterComponent player={null} enemy={enemy} />}
     </div>
   );
 };

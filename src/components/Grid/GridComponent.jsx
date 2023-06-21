@@ -101,6 +101,7 @@ const GridComponent = () => {
                     enemy={enemy}
                     playerCurrentTileIndex={playerCurrentTileIndex}
                     busterCurrentTileIndex={busterCurrentTileIndex}
+                    enemyCurrentTileIndex={enemyCurrentTileIndex}
                   />
                 );
               })}

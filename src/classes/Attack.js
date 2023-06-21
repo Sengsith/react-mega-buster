@@ -24,10 +24,10 @@ class Attack {
     }
   }
 
-  isExpired() {
-    // Check if projectile has reached the end of row/lifespan
-    return this.currentTileIndex.j >= 5;
-  }
+  // isExpired() {
+  //   // Check if projectile has reached the end of row/lifespan
+  //   return this.currentTileIndex.j >= 5;
+  // }
 
   isAttackOnCurrentTile(currentTileIndex) {
     return (
