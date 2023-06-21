@@ -1,8 +1,5 @@
-import React from "react";
-
-class Fighter extends React.Component {
+class Fighter {
   constructor({ health, tag, size, currentTileIndex }) {
-    super();
     this.health = health;
     this.tag = tag;
     this.size = size;
@@ -15,7 +12,7 @@ class Fighter extends React.Component {
       timePerTile: 25,
       currentTileIndex: {},
     };
-    // state to keep track of previous
+    this.isFiring = false;
   }
 
   moveUp() {

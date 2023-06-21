@@ -8,10 +8,12 @@ import styles from "./tile_component.module.scss";
 const TileComponent = ({
   tile,
   player,
+  enemy,
   playerCurrentTileIndex,
   busterCurrentTileIndex,
 }) => {
   const [isPlayerOnTile, setIsPlayerOnTile] = useState(false);
+  const [isEnemyOnTile, setIsEnemyOnTile] = useState(false);
   const [isBusterOnTile, setIsBusterOnTile] = useState(null);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const TileComponent = ({
   // If the currentTileIndex of attack and the currentTileIndex of the tile is the same, then we render out the attack
   return (
     <div className={styles.tile} style={tileStyle}>
-      {isPlayerOnTile && <FighterComponent player={player} />}
+      {isPlayerOnTile && <FighterComponent player={player} enemy={enemy} />}
       {isBusterOnTile && <AttackComponent />}
     </div>
   );
